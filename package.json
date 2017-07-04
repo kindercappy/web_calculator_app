@@ -1,0 +1,25 @@
+{
+  "name": "calculator_app",
+  "version": "0.0.1",
+  "description": "this is a web calculator application for freeCodeCamp project built with <3 by KinderPreet Singh",
+  "main": "script.js",
+  "repository": {
+    "type": "git",
+    "url": ".git"
+  },
+  "keywords": [
+    "web",
+    "calculator",
+    "freeCodeCamp"
+  ],
+  "author": "KinderPreet Singh",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-compass": "^2.1.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-util": "^3.0.8"
+  }
+}
