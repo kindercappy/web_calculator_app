@@ -1,61 +1,83 @@
-function performCalc(oper,currVal,prevVal){
-	var intCurrVal = Number(currVal);
-	var intPrevVal = Number(prevVal);
-	var result = 0;
+var result = 0;
+function performCalc(oper,value){
+	// console.log(value);
+	var intValue = parseFloat(value);
+	// console.log(intValue + 1);
+	var intResult = parseFloat(result);
 	switch (oper) {
 		case '+':
-			result = intPrevVal + intCurrVal;
+			intResult += intValue;
 			break;
 		case '-':
-			result = intPrevVal - intCurrVal;
+			intResult -= intValue;
 			break;
 		case 'x':
-			result = intPrevVal * intCurrVal;
+			intResult *= intValue;
 			break;
 		case '/':
-			result = intPrevVal / intCurrVal;
+			intResult /= intValue;
 			break;
 		default:
-			// statements_def
+			return result;
 			break;
 	}
-	return result;
+	//console.log(result);
+	return intResult;
 }
 
 $(document).ready(function(){
 	var currValue = 0;
-	var result = 0;
+	// var result = 0;
 	var collectNums = [];
 	var history = [];
 	var prevNo = 0;
 	var operator = '';
 	$('button').click(function(){
 		var currNo = 0;
-
+		var regex = /^\d+$/;
 		currValue = $(this).attr('value');
-		// console.log(currValue);
 		if(currValue === '='){
-			currNo = collectNums.join("");
-			// console.log(currNo);
-			result = performCalc(operator,currNo,prevNo);
-			// prevNo = result;
-			$('.result').text(result);
-		}else if (currValue == '+' || currValue == '-' || currValue == 'x' || currValue == '/') {
-			operator = currValue;
-			console.log(operator);
+			//equals is pressed perform the operation
 			prevNo = collectNums.join("");
-			collectNums = [];
 			// console.log(prevNo);
-			// console.log(collectNums);
-		}else{
+			result = performCalc(operator,prevNo);
+			// console.log(result);
+			// console.log(result);
+			$('.result').text(result);
+		}//(currValue === '=')
+		else if (currValue == '+' || currValue == '-' || currValue == 'x' || currValue == '/') {
+		//get the firstNumber entered
+		console.log(currValue);
+			if(result === 0 && history[0].match(regex)){
+				result = collectNums.join("");
+				console.log(result);
+				collectNums = [];
+			}else {
+				//get the the next numbers
+				prevNo = collectNums.join("");
+				result = performCalc(operator,prevNo);
+				console.log(result);
+				console.log(prevNo);
+			}
+			operator = currValue;
+			collectNums = [];
+		}//(currValue == '+' || currValue == '-' || currValue == 'x' || currValue == '/')
+		else if(currValue === 'ce'){
+			result = 0;
+			history = [];
+			prevNo = 0;
+			collectNums = [];
+			$('.result').text(result);
+			$('.history').text(result);
+			return;
+		}
+		else{
 			collectNums.push(currValue);
-
-			// console.log(collectNums);
 		}
 		history.push(currValue);
-		$('.history').text(history.join(""));
-		// $('.collectNums').text(collectNums);
-		// $('.collectNums').text(collectNums);
+		his = history.join("");
+		his = his.replace(/=/g,"");
+		$('.history').text(his);
 	});
 	
 });
