@@ -1,5 +1,24 @@
 .calcContainer{
-	width: 50%;
-	background-color: black;
+	// width: 25%;
+	// background-color: black;
+	width: 400px;
 	color: $color_white;
+	padding: 10px;
+}
+.calcButtonContainer{
+	margin: 10px 0;
+}
+button{
+	width: 90px;
+	background-color: $color_black;
+	color: $color_white;
+}
+.zero{
+	width: 185px;
+}
+.equals{
+	width: 185px;
+}
+.outputContainer{
+	color: $color_black;
 }
