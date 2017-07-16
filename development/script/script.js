@@ -1,4 +1,4 @@
-var result = 0;
+result = 0;
 function performCalc(oper,value){
 	// console.log(value);
 	var intValue = parseFloat(value);
@@ -27,7 +27,7 @@ function performCalc(oper,value){
 
 $(document).ready(function(){
 	var currValue = 0;
-	// var result = 0;
+	// var result = 0;	
 	var collectNums = [];
 	var history = [];
 	var prevNo = 0;
@@ -47,20 +47,26 @@ $(document).ready(function(){
 		}//(currValue === '=')
 		else if (currValue == '+' || currValue == '-' || currValue == 'x' || currValue == '/') {
 		//get the firstNumber entered
-		console.log(currValue);
-			if(result === 0 && history[0].match(regex)){
-				result = collectNums.join("");
-				console.log(result);
-				collectNums = [];
-			}else {
-				//get the the next numbers
-				prevNo = collectNums.join("");
-				result = performCalc(operator,prevNo);
-				console.log(result);
-				console.log(prevNo);
-			}
+		// console.log(currValue);.
+		
 			operator = currValue;
-			collectNums = [];
+			if(history.length > 0){
+				console.log("Hola");
+				if(result === 0 && history[0].match(regex)){
+					result = collectNums.join("");
+					// console.log(result);
+					collectNums = [];
+				}else {
+					//get the the next numbers
+					prevNo = collectNums.join("");
+					collectNums = [];
+					// result = performCalc(operator,prevNo);
+					// console.log(result + ' result');
+					// console.log(prevNo + ' prev');
+				}
+			}else{
+				$('.history').text('Please enter a number');
+			}
 		}//(currValue == '+' || currValue == '-' || currValue == 'x' || currValue == '/')
 		else if(currValue === 'ce'){
 			result = 0;
@@ -72,7 +78,9 @@ $(document).ready(function(){
 			return;
 		}
 		else{
-			collectNums.push(currValue);
+			// if(currValue !== operator){
+				collectNums.push(currValue);
+			// }
 		}
 		history.push(currValue);
 		his = history.join("");
