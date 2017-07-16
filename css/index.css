@@ -1,7 +1,10 @@
 .calcContainer {
+  background-color: black;
   width: 400px;
   color: white;
   padding: 10px;
+  margin: 5rem auto;
+  font-size: 1.5rem;
 }
 
 .calcButtonContainer {
@@ -26,6 +29,28 @@ button {
   width: 185px;
 }
 
-.outputContainer {
-  color: black;
+@media (max-width: 576px) {
+  .calcContainer {
+    font-size: 1rem;
+    width: 90%;
+    padding: 10px;
+  }
+
+  .zero {
+    width: 49%;
+  }
+
+  .equals {
+    width: 49%;
+  }
+
+  .ce {
+    width: 49%;
+  }
+
+  button {
+    width: 23.5%;
+    background-color: black;
+    color: white;
+  }
 }

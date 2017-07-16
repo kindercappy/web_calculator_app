@@ -9,7 +9,7 @@ function performCalc(oper,value){
 		case '-':
 			intResult -= intValue;
 			break;
-		case 'x':
+		case '*':
 			intResult *= intValue;
 			break;
 		case '/':
@@ -40,7 +40,7 @@ $(document).ready(function(){
 			if(Number.isNaN(result)) return $('.result').text('Can\'t process');
 			$('.result').text(result);
 		}//(currValue === '=')
-		else if (currValue == '+' || currValue == '-' || currValue == 'x' || currValue == '/') {
+		else if (currValue == '+' || currValue == '-' || currValue == '*' || currValue == '/') {
 			if(history.length > 0){
 				//get the firstNumber entered
 				if(result === 0 && history[0].match(regex)){
@@ -56,7 +56,7 @@ $(document).ready(function(){
 				$('.history').text('Please enter a number');
 				return;
 			}
-			if(history[history.length-1] !== currValue && history[history.length-1] !== '+' && history[history.length-1] !== '-' && history[history.length-1] !== '/' && history[history.length-1] !== 'x'){
+			if(history[history.length-1] !== currValue && history[history.length-1] !== '+' && history[history.length-1] !== '-' && history[history.length-1] !== '/' && history[history.length-1] !== '*'){
 				operator = currValue;
 				console.log(operator)
 				history.push(currValue);
