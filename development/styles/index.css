@@ -1,39 +1,63 @@
+body {
+  background: linear-gradient(to right, #0865F1, #C704F6);
+}
+
+h3 {
+  display: none;
+}
+
 .calcContainer {
   background-color: black;
-  width: 400px;
+  width: 40%;
   color: white;
-  padding: 10px;
+  padding: 2rem;
   margin: 5rem auto;
   font-size: 1.5rem;
+  border-top-left-radius: 3rem;
+  border-bottom-right-radius: 5rem;
+  -webkit-box-shadow: inset 0px 0px 94px -15px rgba(8, 101, 241, 0.64);
+  -moz-box-shadow: inset 0px 0px 94px -15px rgba(8, 101, 241, 0.64);
+  box-shadow: inset 0px 0px 94px -15px rgba(8, 101, 241, 0.64);
+}
+.calcContainer .result, .calcContainer .history {
+  background-color: #0865F1;
+  color: black;
+  padding: 5px;
+  font-size: 1.5rem;
+  border: 5px solid transparent;
+  border-image: linear-gradient(to right, #0865F1 0%, #C704F6 100%);
+  border-image-slice: 1;
 }
 
 .calcButtonContainer {
   margin: 10px 0;
 }
 
-button {
-  width: 90px;
-  background-color: black;
+i {
+  color: red;
+}
+
+.register-button {
+  border: 2.5px solid transparent;
+  border-image: linear-gradient(to right, #0865F1 0%, #C704F6 100%);
+  border-image-slice: 1;
   color: white;
+  text-decoration: none;
+  font-weight: bold;
+  background: black;
 }
 
-.zero {
-  width: 185px;
-}
-
-.equals {
-  width: 185px;
-}
-
-.ce {
-  width: 185px;
+.register-button:hover {
+  background-color: white;
+  background: linear-gradient(to right, #0865F1, #C704F6);
+  color: #fff;
+  cursor: pointer;
 }
 
 @media (max-width: 576px) {
   .calcContainer {
     font-size: 1rem;
     width: 90%;
-    padding: 10px;
   }
 
   .zero {
@@ -49,8 +73,94 @@ button {
   }
 
   button {
-    width: 23.5%;
-    background-color: black;
-    color: white;
+    width: 23.8%;
+  }
+}
+@media (min-width: 577px) and (max-width: 767px) {
+  .calcContainer {
+    font-size: 1rem;
+    width: 60%;
+  }
+
+  .zero {
+    width: 49%;
+  }
+
+  .equals {
+    width: 49%;
+  }
+
+  .ce {
+    width: 49%;
+  }
+
+  button {
+    width: 23.8%;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .calcContainer {
+    font-size: 1rem;
+    width: 55%;
+  }
+
+  .zero {
+    width: 49%;
+  }
+
+  .equals {
+    width: 49%;
+  }
+
+  .ce {
+    width: 49%;
+  }
+
+  button {
+    width: 24%;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .calcContainer {
+    font-size: 1.5rem;
+    width: 55%;
+  }
+
+  .zero {
+    width: 49%;
+  }
+
+  .equals {
+    width: 49%;
+  }
+
+  .ce {
+    width: 49%;
+  }
+
+  button {
+    width: 23.8%;
+  }
+}
+@media (min-width: 1200px) {
+  .calcContainer {
+    font-size: 1.5rem;
+    width: 40%;
+  }
+
+  .zero {
+    width: 49%;
+  }
+
+  .equals {
+    width: 49%;
+  }
+
+  .ce {
+    width: 49%;
+  }
+
+  button {
+    width: 23.8%;
   }
 }

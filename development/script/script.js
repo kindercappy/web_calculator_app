@@ -22,8 +22,20 @@ function performCalc(oper,value){
 	}
 	return intResult;
 }
-
+function showHistory(history){
+	his = history.join("");
+	his = his.replace(/=/g,"");
+	$('.history').text(his);
+}
 $(document).ready(function(){
+
+	$("h3").fadeIn()
+
+	.css({bottom:1000,position:'absolute',left:10})
+	.animate({bottom:20}, 800, function() {
+	    //callback
+	});
+	$('.calcButtonContainer').hide().fadeIn(3000);
 	var currValue = 0;	
 	var collectNums = [];
 	var history = [];
@@ -37,6 +49,7 @@ $(document).ready(function(){
 			//equals is pressed perform the operation
 			prevNo = collectNums.join("");
 			result = performCalc(operator,prevNo);
+			// collectNums=[];
 			if(Number.isNaN(result)) return $('.result').text('Can\'t process');
 			$('.result').text(result);
 		}//(currValue === '=')
@@ -58,7 +71,6 @@ $(document).ready(function(){
 			}
 			if(history[history.length-1] !== currValue && history[history.length-1] !== '+' && history[history.length-1] !== '-' && history[history.length-1] !== '/' && history[history.length-1] !== '*'){
 				operator = currValue;
-				console.log(operator)
 				history.push(currValue);
 			}//(history[history.length-1] !== currValue && history[history.length-1] !== '+' && history[history.length-1] !== '-' && history[history.length-1] !== '/' && history[history.length-1] !== 'x')
 		}//(currValue == '+' || currValue == '-' || currValue == 'x' || currValue == '/')
@@ -77,10 +89,8 @@ $(document).ready(function(){
 			collectNums.push(currValue);
 			history.push(currValue);
 		}
-		//join the history array and replace the = sign
-		his = history.join("");
-		his = his.replace(/=/g,"");
-		$('.history').text(his);
+		//join the history array and replace the = sign and show it
+		showHistory(history);
 	});
 	
 });

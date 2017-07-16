@@ -1,35 +1,70 @@
+body{
+	background: linear-gradient(to right, $color_button_left, $color_button_right);
+
+}
+h3,h5{
+	// padding-top: .5rem;
+	// padding-bottom: .5rem;
+}
+h3{
+	display: none;
+
+}
 .calcContainer{
-	// width: 25%;
 	background-color: $color_black;
-	width: 400px;
+	width: 40%;
 	color: $color_white;
-	padding: 10px;
+	padding: 2rem;
 	margin: 5rem auto;
 	font-size: 1.5rem;
+	border-top-left-radius: 3rem;
+	border-bottom-right-radius: 5rem;
+-webkit-box-shadow: inset 0px 0px 94px -15px rgba(8,101,241,0.64);
+-moz-box-shadow: inset 0px 0px 94px -15px rgba(8,101,241,0.64);
+box-shadow: inset 0px 0px 94px -15px rgba(8,101,241,0.64);
+	.result,.history{
+		background-color: $color_button_left;
+		color: $color_black;
+		padding: 5px;
+		font-size: 1.5rem;
+		border: 5px solid transparent;
+		border-image: linear-gradient(to right, $color_button_left 0%, $color_button_right 100%);
+		border-image-slice: 1;
+	}
 }
 
 .calcButtonContainer{
 	margin: 10px 0;
 }
-button{
-	width: 90px;
-	background-color: $color_black;
-	color: $color_white;
+
+i{
+	color: red;
 }
-.zero{
-	width: 185px;
+.register-button {  
+    border: 2.5px solid transparent;
+    border-image: linear-gradient(to right, $color_button_left 0%, $color_button_right 100%);
+    border-image-slice: 1;
+  
+    color: $color_white;
+    // font-size: 2em;
+    // padding: 10px 40px;
+    text-decoration: none;
+    font-weight: bold;
+    background: $color_black;
+    // text-transform: uppercase;
 }
-.equals{
-	width: 185px;
+.register-button:hover {
+    background-color: white;
+    background: linear-gradient(to right, $color_button_left, $color_button_right);
+    color: #fff;
+    cursor: pointer;
 }
-.ce{
-	width: 185px;
-}
+
 @media (max-width: 576px){
 	.calcContainer{
 		font-size: 1rem;
 		width: 90%;
-		padding: 10px;
+
 	}
 	.zero{
 		width: 49%;
@@ -41,8 +76,80 @@ button{
 		width: 49%;
 	}
 	button{
-		width: 23.5%;
-		background-color: $color_black;
-		color: $color_white;
+		width: 23.8%;
+	}
+}
+@media (min-width: 577px) and (max-width: 767px){
+	.calcContainer{
+		font-size: 1rem;
+		width: 60%;
+	}
+	.zero{
+		width: 49%;
+	}
+	.equals{
+		width: 49%;
+	}
+	.ce{
+		width: 49%;
+	}
+	button{
+		width: 23.8%;
+	}
+}
+@media (min-width: 768px) and (max-width: 991px){
+	.calcContainer{
+		font-size: 1rem;
+		width: 55%;
+
+	}
+	.zero{
+		width: 49%;
+	}
+	.equals{
+		width: 49%;
+	}
+	.ce{
+		width: 49%;
+	}
+	button{
+		width: 24%;
+	}
+}
+@media (min-width: 992px) and (max-width: 1199px){
+	.calcContainer{
+		font-size: 1.5rem;
+		width: 55%;
+
+	}
+	.zero{
+		width: 49%;
+	}
+	.equals{
+		width: 49%;
+	}
+	.ce{
+		width: 49%;
+	}
+	button{
+		width: 23.8%;
+	}
+}
+@media (min-width: 1200px){
+	.calcContainer{
+		font-size: 1.5rem;
+		width: 40%;
+	}
+	.zero{
+		width: 49%;
+	}
+	.equals{
+		width: 49%;
+	}
+	.ce{
+		width: 49%;
+	}
+	button{
+		width: 23.8%;
 	}
 }
