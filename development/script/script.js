@@ -1,8 +1,6 @@
 result = 0;
 function performCalc(oper,value){
-	// console.log(value);
 	var intValue = parseFloat(value);
-	// console.log(intValue + 1);
 	var intResult = parseFloat(result);
 	switch (oper) {
 		case '+':
@@ -15,19 +13,18 @@ function performCalc(oper,value){
 			intResult *= intValue;
 			break;
 		case '/':
+			if(intValue===0) return intResult = 'Can\'t divide by zero';
 			intResult /= intValue;
 			break;
 		default:
 			return result;
 			break;
 	}
-	//console.log(result);
 	return intResult;
 }
 
 $(document).ready(function(){
-	var currValue = 0;
-	// var result = 0;	
+	var currValue = 0;	
 	var collectNums = [];
 	var history = [];
 	var prevNo = 0;
@@ -39,36 +36,34 @@ $(document).ready(function(){
 		if(currValue === '='){
 			//equals is pressed perform the operation
 			prevNo = collectNums.join("");
-			// console.log(prevNo);
 			result = performCalc(operator,prevNo);
-			// console.log(result);
-			// console.log(result);
+			if(Number.isNaN(result)) return $('.result').text('Can\'t process');
 			$('.result').text(result);
 		}//(currValue === '=')
 		else if (currValue == '+' || currValue == '-' || currValue == 'x' || currValue == '/') {
-		//get the firstNumber entered
-		// console.log(currValue);.
-		
-			operator = currValue;
 			if(history.length > 0){
-				console.log("Hola");
+				//get the firstNumber entered
 				if(result === 0 && history[0].match(regex)){
 					result = collectNums.join("");
-					// console.log(result);
 					collectNums = [];
 				}else {
 					//get the the next numbers
 					prevNo = collectNums.join("");
 					collectNums = [];
-					// result = performCalc(operator,prevNo);
-					// console.log(result + ' result');
-					// console.log(prevNo + ' prev');
 				}
-			}else{
+			}//(history.length > 0)
+			else{
 				$('.history').text('Please enter a number');
+				return;
 			}
+			if(history[history.length-1] !== currValue && history[history.length-1] !== '+' && history[history.length-1] !== '-' && history[history.length-1] !== '/' && history[history.length-1] !== 'x'){
+				operator = currValue;
+				console.log(operator)
+				history.push(currValue);
+			}//(history[history.length-1] !== currValue && history[history.length-1] !== '+' && history[history.length-1] !== '-' && history[history.length-1] !== '/' && history[history.length-1] !== 'x')
 		}//(currValue == '+' || currValue == '-' || currValue == 'x' || currValue == '/')
 		else if(currValue === 'ce'){
+			//clear the variables as ce is pressed
 			result = 0;
 			history = [];
 			prevNo = 0;
@@ -76,13 +71,13 @@ $(document).ready(function(){
 			$('.result').text(result);
 			$('.history').text(result);
 			return;
-		}
+		}//(currValue === 'ce')
 		else{
-			// if(currValue !== operator){
-				collectNums.push(currValue);
-			// }
+			//push the numbers pressed back to back into the collection
+			collectNums.push(currValue);
+			history.push(currValue);
 		}
-		history.push(currValue);
+		//join the history array and replace the = sign
 		his = history.join("");
 		his = his.replace(/=/g,"");
 		$('.history').text(his);
