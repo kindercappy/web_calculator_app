@@ -4,9 +4,11 @@ body {
 
 h5 {
   display: none;
+  font-size: 1rem;
 }
 
 .calcContainer {
+  display: none;
   background-color: black;
   color: white;
   padding: 2rem;
@@ -163,6 +165,6 @@ i {
   }
 
   button {
-    width: 23.8%;
+    width: 23.9%;
   }
 }

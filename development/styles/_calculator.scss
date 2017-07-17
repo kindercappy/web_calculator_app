@@ -3,9 +3,12 @@ body{
 
 }
 h5{
-	display: none;
+		display:none;
+		font-size: 1rem;
 }
+
 .calcContainer{
+  display:none;
 	background-color          : $color_black;
 	color                     : $color_white;
 	padding                   : 2rem;
@@ -29,6 +32,7 @@ h5{
 
 .calcButtonContainer{
 	margin: 10px 0;
+  
 }
 
 i{
@@ -145,6 +149,6 @@ i{
 		width: 49%;
 	}
 	button{
-		width: 23.8%;
+		width: 23.9%;
 	}
 }
