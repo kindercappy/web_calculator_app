@@ -1,4 +1,4 @@
-result = 0;
+var result =0;
 function performCalc(oper,value){
 	var intValue = parseFloat(value);
 	var intResult = parseFloat(result);
@@ -28,40 +28,41 @@ function showHistory(history){
 	$('.history').text(his);
 }
 $(document).ready(function(){
-
-	$("h3").fadeIn()
-
-	.css({bottom:1000,position:'absolute',left:10})
-	.animate({bottom:20}, 800, function() {
-	    //callback
-	});
-	$('.calcButtonContainer').hide().fadeIn(3000);
-	var currValue = 0;	
+	$("h5").fadeIn()
+	.css({bottom:1000,position:'absolute',left:5})
+	.animate({bottom:10}, 2000);
+	$('.calcButtonContainer').hide().fadeIn(4000);
+	var currValue   = 0;	
 	var collectNums = [];
-	var history = [];
-	var prevNo = 0;
-	var operator = '';
+	var history     = [];
+	var prevNo      = 0;
+	var operator    = '';
 	$('button').click(function(){
 		var currNo = 0;
-		var regex = /^\d+$/;
-		currValue = $(this).attr('value');
+		var regex  = /^\d+$/;
+		currValue  = $(this).attr('value');
 		if(currValue === '='){
-			//equals is pressed perform the operation
-			prevNo = collectNums.join("");
-			result = performCalc(operator,prevNo);
-			// collectNums=[];
-			if(Number.isNaN(result)) return $('.result').text('Can\'t process');
-			$('.result').text(result);
+			//equals is pressed perform the operation\
+				if(collectNums.length > 0){
+					prevNo = collectNums.join("");
+					collectNums=[];
+					result = performCalc(operator,prevNo);
+					var rounded =  result;
+					$('.result').text(rounded);
+				}else {
+					$('.result').text(result);
+				}
 		}//(currValue === '=')
 		else if (currValue == '+' || currValue == '-' || currValue == '*' || currValue == '/') {
-			if(history.length > 0){
+			if(history.length >= 0){
 				//get the firstNumber entered
 				if(result === 0 && history[0].match(regex)){
-					result = collectNums.join("");
+					result      = collectNums.join("");
 					collectNums = [];
-				}else {
+				}else if(collectNums.length > 0){
 					//get the the next numbers
 					prevNo = collectNums.join("");
+					result = performCalc(operator,prevNo);
 					collectNums = [];
 				}
 			}//(history.length > 0)
@@ -72,6 +73,7 @@ $(document).ready(function(){
 			if(history[history.length-1] !== currValue && history[history.length-1] !== '+' && history[history.length-1] !== '-' && history[history.length-1] !== '/' && history[history.length-1] !== '*'){
 				operator = currValue;
 				history.push(currValue);
+				// return;
 			}//(history[history.length-1] !== currValue && history[history.length-1] !== '+' && history[history.length-1] !== '-' && history[history.length-1] !== '/' && history[history.length-1] !== 'x')
 		}//(currValue == '+' || currValue == '-' || currValue == 'x' || currValue == '/')
 		else if(currValue === 'ce'){
