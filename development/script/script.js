@@ -27,6 +27,17 @@ function showHistory(history){
 	his = his.replace(/=/g,"");
 	$('.history').text(his);
 }
+// check if its avalid number
+function checkNum(collectNums){///^(-)?(\.)?\d+(\.\d{1,3})?$/
+	var regex1Decimal = /^(-)?\d+(\d{1,2})?$|^(-)?\d+(\.\d{1,2})?$|^(-)?(\.)?\d{1,2}?$/;
+	if(collectNums.join("").match(regex1Decimal)){
+		return collectNums;
+	}
+	else{
+		collectNums = [];
+		$('.history').text("Please a enter valid number");
+	}
+}
 $(document).ready(function(){
 	$("h5").fadeIn()
 	.css({bottom:1000,position:'absolute',left:5})
@@ -49,57 +60,67 @@ $(document).ready(function(){
 		}
 		if(currValue === '='){
 			//equals is pressed perform the operation
+				//checkIfDidgitEnteredAfterEqualPressed is set to true to check if the next button pressed is a digit or an operator and perform operations accordingly
 				checkIfDidgitEnteredAfterEqualPressed = true;
 				if(collectNums.length > 0){
 					prevNo = collectNums.join("");
 					collectNums=[];
 					history=[];
 					result = performCalc(operator,prevNo);
+					if(result == 'Can\'t divide by zero'){
+						$('.history').text(result);
+						$('.result').text(result);
+						return;
+					}
 					var rounded =  Math.round(result * 100)/100;
+					if(Number.isNaN(rounded)) rounded = "Can't process";
 					$('.history').text(rounded);
 					$('.result').text(rounded);
-					// result=0;
 					return;
 				}else {
 					$('.history').text(result);
 					$('.result').text(result);
-					// console.log(result);
 					return;
 				}
 		}//(currValue === '=')
 		else if (currValue == '+' || currValue == '-' || currValue == '*' || currValue == '/') {
 			if(currValue === '-' && collectNums.length <= 0){
 				if(history[history.length-1] !== currValue){
+					//checkIfDidgitEnteredAfterEqualPressed is set to false because an operator was pressed after equal was pressed
 					checkIfDidgitEnteredAfterEqualPressed=false;
 					history.push(currValue);
 					collectNums.push(currValue);
+					$('.history').text(currValue);
 					return;
 				}
-
-			}
-			if(history.length >= 0){
-				//get the firstNumber entered
-				if(result === 0 ){
-					// console.log(collectNums.join(""));
-					result      = collectNums.join("");
-					checkIfDidgitEnteredAfterEqualPressed=false;
-					// console.log(result);
-					collectNums = [];
-				}else if(collectNums.length > 0){
-					//get the the next numbers
-					prevNo = collectNums.join("");
-					checkIfDidgitEnteredAfterEqualPressed=false;
-					result = performCalc(operator,prevNo);
-					collectNums = [];
+			}			
+				if(history.length >= 0){
+					//get the firstNumber entered
+					if(result === 0 ){
+						// console.log(collectNums.join(""));
+						collectNums = checkNum(collectNums);
+						result      = collectNums.join("");
+						//checkIfDidgitEnteredAfterEqualPressed is set to false because an operator was pressed after equal was pressed
+						checkIfDidgitEnteredAfterEqualPressed=false;
+						collectNums = [];
+					}else if(collectNums.length > 0){
+						//get the the next numbers
+						collectNums = checkNum(collectNums);
+						prevNo = collectNums.join("");
+						//checkIfDidgitEnteredAfterEqualPressed is set to false because an operator was pressed after equal was pressed
+						checkIfDidgitEnteredAfterEqualPressed=false;
+						result = performCalc(operator,prevNo);
+						collectNums = [];
+					}
+				}//(history.length > 0)
+				else{
+					$('.history').text('Please enter a number');
+					return;
 				}
-			}//(history.length > 0)
-			else{
-				$('.history').text('Please enter a number');
-				return;
-			}
 			if(history[history.length-1] !== currValue && history[history.length-1] !== '+' && history[history.length-1] !== '-' && history[history.length-1] !== '/' && history[history.length-1] !== '*'){
 				operator = currValue;
 				history.push(currValue);
+				//checkIfDidgitEnteredAfterEqualPressed is set to false because an operator was pressed after equal was pressed
 				checkIfDidgitEnteredAfterEqualPressed=false;
 
 			}//(history[history.length-1] !== currValue && history[history.length-1] !== '+' && history[history.length-1] !== '-' && history[history.length-1] !== '/' && history[history.length-1] !== 'x')
@@ -117,10 +138,9 @@ $(document).ready(function(){
 		else{
 			//push the numbers pressed back to back into the collection
 			collectNums.push(currValue);
-			history.push(currValue);
+				history.push(currValue);
 		}
 		//join the history array and replace the = sign and show it
 		showHistory(history);
 	});
-	
 });
